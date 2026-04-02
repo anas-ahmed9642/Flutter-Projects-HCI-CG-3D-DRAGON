@@ -1,0 +1,23 @@
+name: balerions_skull
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  audioplayers: ^6.6.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/audio/vermithor.mp3
+    - assets/images/red_keep_dungeon.png
+    - assets/models/balerion.obj
