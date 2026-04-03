@@ -55,17 +55,29 @@ class DragonPainter extends CustomPainter {
       path.lineTo(tri.p2.x, tri.p2.y);
       path.lineTo(tri.p3.x, tri.p3.y);
       path.close();
-      double contrastEffect = pow(tri.brightness, 1.5).toDouble();
+      double contrastEffect = pow(tri.brightness, 1.3).toDouble();
+    int baseR = 60;
+    int baseG = 58;
+    int baseB = 65;
 
-      // Base shadow: A dusty, dark grey (the "Blackish" part) -> (45, 42, 40)
-      // Highlight: We add a massive amount of light (+210) to reach pure pale bone (the "White" part)
-      int r = (45 + (210 * contrastEffect)).toInt().clamp(0, 255);
-      int g = (42 + (205 * contrastEffect)).toInt().clamp(0, 255);
-      int b = (40 + (195 * contrastEffect)).toInt().clamp(0, 255);
+// Highlight: warm ivory bone (real skull tone)
+int highlightR = 230;
+int highlightG = 220;
+int highlightB = 190;
 
-      Paint fillPaint = Paint()
-        ..color = Color.fromARGB(255, r, g, b)
-        ..style = PaintingStyle.fill;
+// Interpolate between shadow and highlight
+int r = (baseR + (highlightR - baseR) * contrastEffect).toInt().clamp(0, 255);
+int g = (baseG + (highlightG - baseG) * contrastEffect).toInt().clamp(0, 255);
+int b = (baseB + (highlightB - baseB) * contrastEffect).toInt().clamp(0, 255);
+
+// Slight boost for visibility on dark background
+r = (r * 1.05).toInt().clamp(0, 255);
+g = (g * 1.05).toInt().clamp(0, 255);
+b = (b * 1.08).toInt().clamp(0, 255);
+
+Paint fillPaint = Paint()
+  ..color = Color.fromARGB(255, r, g, b)
+  ..style = PaintingStyle.fill;
 
       canvas.drawPath(path, fillPaint);    }
   }
